@@ -16,7 +16,7 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "test": "npm run rawtest",
-    "clean": "rimraf dist",
+    "clean": "rm -rf dist",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "postformat": "tslint -p . --fix",
     "prebuild": "npm run clean",
