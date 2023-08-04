@@ -154,6 +154,23 @@ export function addValue(mem: Memory, o: any, parent: Parent | undefined): Key {
   if (o === null) {
     return ''
   }
+  // eliminate functions and classes
+  if(o !== undefined){
+    const constructorName = (o).constructor?.name;
+    switch(constructorName){
+      // pass if one of theses classes
+      case 'Number':
+      case 'String':
+      case 'Object':
+      case 'Array':
+      case 'Boolean':
+        break;
+      // stringify or null out otherwise
+      default:
+        return constructorName ? getValueKey(mem, encodeStr(constructorName)) : addValue(mem, null, parent);
+    } 
+  }
+
   switch (typeof o) {
     case 'undefined':
       if (Array.isArray(parent)) {
